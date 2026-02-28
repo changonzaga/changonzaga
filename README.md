@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner2.gif" />
+  <img src="banner2.gif"/>
 </p>
 <p align="center"><img src="https://raw.githubusercontent.com/changonzaga/changonzaga/output/snake-dark.svg" alt="Contribution Snake Animation" /></p>
 About Me
