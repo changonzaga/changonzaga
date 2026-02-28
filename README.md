@@ -15,6 +15,7 @@
 ## 📫 Contact Me
 [✉️ chrgonzaga@my.cspc.edu.ph](mailto:chrgonzaga@my.cspc.edu.ph)
 ## Tech Stack
-<p align="center"> <img src="https://skillicons.dev/icons?i=react,reactnative,js,java,html,css,tailwind,firebase,figma,github,vscode" /> </p>
-## GitHub Stats
+<p align="center"> <img src="https://skillicons.dev/icons?i=react,reactnative,js,java,html,css,tailwind,firebase,figma,github,vscode" /></p>
+
+## Github Stats 
 <p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=changonzaga&theme=tokyonight&hide_border=true" /> </p>
