@@ -1,18 +1,23 @@
 <p align="center"><img src="profile.gif"/></p>
 <p align="center"><img src="https://raw.githubusercontent.com/changonzaga/changonzaga/output/snake-dark.svg" alt="Contribution Snake Animation" /></p>
-About Me
+# 👋 Hi, I'm CHR Gonzaga
 
-Focus: Frontend systems and structured backend flow
+## 🌟 About Me
+- **Focus:** Crafting seamless frontend experiences & structured backend flows  
+- **Building:** Student systems, dashboards, mobile applications  
+- **Improving:** UI consistency, scalability, and reusable components  
 
-Building: Student systems, dashboards, mobile apps
+## 🛠 Tech Stack
+- **Frontend:** React Native, Tailwind CSS  
+- **Backend:** CodeIgniter 4  
+- **Other Tools:** Git, GitHub  
 
-Improving: UI consistency and reusable components
-
-Stack: React Native, CodeIgniter 4, Tailwind
-
-Email: chrgonzaga@my.cspc.edu.ph
-
+## 📫 Contact Me
+[✉️ chrgonzaga@my.cspc.edu.ph](mailto:chrgonzaga@my.cspc.edu.ph)
+![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react)
+![CodeIgniter](https://img.shields.io/badge/CodeIgniter-EF4223?style=for-the-badge&logo=codeigniter)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css)
 Tech Stack
 <p align="center"> <img src="https://skillicons.dev/icons?i=react,reactnative,js,java,html,css,tailwind,firebase,figma,github,vscode" /> </p>
 GitHub Stats
-<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=changonzaga&show_icons=true&theme=tokyonight&hide_border=true" /> </p> <p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=changonzaga&theme=tokyonight&hide_border=true" /> </p>
+<p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=changonzaga&theme=tokyonight&hide_border=true" /> </p>
