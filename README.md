@@ -9,7 +9,7 @@
 - **Improving:** UI consistency, scalability, and reusable components  
   
 ## Tech Stack
-<p align="center"> <img src="https://skillicons.dev/icons?i=react,javascript,java,html,css,tailwind,firebase,figma,github,vscode,supabase,n8n,gemini,claude" /></p>
+<p align="center"> <img src="https://skillicons.dev/icons?i=react,javascript,java,html,css,tailwind,firebase,figma,github,vscode,supabase,bootstrap,aws,hostinger" /></p>
 
 ## Github Stats 
 <p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=changonzaga&theme=tokyonight&hide_border=true" /> </p>
