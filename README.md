@@ -1,5 +1,7 @@
-Chan Gonzaga
-<p align="center"> Full Stack Developer • UI Focused Builder </p> <p align="center"> <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&color=58A6FF&center=true&vCenter=true&width=600&lines=Building+clean+web+and+mobile+apps;Focused+on+UI+structure+and+clarity;React+Native+and+CodeIgniter+4;Continuous+skill+growth" /> </p> <p align="center"><img src="https://raw.githubusercontent.com/changonzaga/changonzaga/output/snake-dark.svg" alt="Contribution Snake Animation" /></p>
+<p align="center">
+  <img src="banner.gif" />
+</p>
+<p align="center"><img src="https://raw.githubusercontent.com/changonzaga/changonzaga/output/snake-dark.svg" alt="Contribution Snake Animation" /></p>
 About Me
 
 Focus: Frontend systems and structured backend flow
