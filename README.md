@@ -14,9 +14,6 @@
 
 ## 📫 Contact Me
 [✉️ chrgonzaga@my.cspc.edu.ph](mailto:chrgonzaga@my.cspc.edu.ph)
-![React Native](https://img.shields.io/badge/React_Native-61DAFB?style=for-the-badge&logo=react)
-![CodeIgniter](https://img.shields.io/badge/CodeIgniter-EF4223?style=for-the-badge&logo=codeigniter)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css)
 Tech Stack
 <p align="center"> <img src="https://skillicons.dev/icons?i=react,reactnative,js,java,html,css,tailwind,firebase,figma,github,vscode" /> </p>
 GitHub Stats
