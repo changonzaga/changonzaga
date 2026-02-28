@@ -16,14 +16,3 @@ Tech Stack
 <p align="center"> <img src="https://skillicons.dev/icons?i=react,reactnative,js,java,html,css,tailwind,firebase,figma,github,vscode" /> </p>
 GitHub Stats
 <p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=changonzaga&show_icons=true&theme=tokyonight&hide_border=true" /> </p> <p align="center"> <img src="https://github-readme-streak-stats.herokuapp.com/?user=changonzaga&theme=tokyonight&hide_border=true" /> </p>
-Current Focus
-
-Strengthening mobile state management
-
-Improving API structure in CodeIgniter 4
-
-Writing cleaner reusable UI components
-
-Connect
-<p align="center"> <a href="mailto:chrgonzaga@my.cspc.edu.ph"> <img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail&logoColor=white" /> </a> <a href="https://twitter.com/changonzaga"> <img src="https://img.shields.io/badge/Twitter-Follow-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" /> </a> <a href="https://linkedin.com/in/changonzaga"> <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /> </a> </p>
-<p align="center"> Build clean. Ship fast. Improve every commit. </p>
