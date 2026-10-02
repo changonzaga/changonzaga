@@ -118,6 +118,7 @@ def ascii_rows_from_image(path):
 
     mask_img = Image.fromarray(alpha.astype(np.uint8), mode="L").resize((ART_COLS, rows), Image.LANCZOS)
     gray_img = Image.fromarray(rgb.astype(np.uint8)).convert("L").resize((ART_COLS, rows), Image.LANCZOS)
+    gray_img = __import__("PIL.ImageOps", fromlist=["ImageOps"]).autocontrast(gray_img, cutoff=2)
     mask_px = mask_img.load()
     gray_px = gray_img.load()
 
