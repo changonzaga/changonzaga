@@ -1,0 +1,43 @@
+name: Generate ASCII profile card
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'assets/profile.svg'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GITHUB_LOGIN: changonzaga
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      OUT_PATH: assets/profile.svg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests numpy
+      - name: Fetch GitHub avatar
+        run: |
+          mkdir -p assets
+          rm -f assets/avatar.*
+          curl -sL "https://github.com/${GITHUB_LOGIN}.png?size=400" -o assets/avatar.png
+      - name: Generate card
+        run: python scripts/generate_card.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/profile.svg
+          git diff --staged --quiet || git commit -m "chore: refresh ascii profile card"
+          git push
