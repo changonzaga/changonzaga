@@ -1,9 +1,3 @@
-<p align="center"><img src="profile2.gif"/></p>
-
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=20&pause=1000&color=00FF41&center=true&vCenter=true&width=500&lines=%24+whoami;%24+cat+stack.txt;%24+git+push+origin+main" alt="Typing animation" />
-</p>
-
 ```bash
 changonzaga@github:~$ whoami
 changonzaga
