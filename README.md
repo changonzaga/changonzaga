@@ -1,3 +1,5 @@
+<p align="center"><img src="profile2.gif"/></p>
+
 ```bash
 changonzaga@github:~$ whoami
 changonzaga
@@ -7,20 +9,46 @@ role     : Full-stack developer
 location : Bicol, Philippines
 focus    : Web apps, mobile apps, clean UI
 
-changonzaga@github:~$ ls ./tech-stack
-```
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,javascript,java,html,css,tailwind,bootstrap,php,laravel,firebase,supabase,mysql,postgresql,docker,aws,vercel,git,github,bitbucket,vscode,figma,postman,notion&perline=9&theme=dark" />
-</p>
+changonzaga@github:~$ tree ./tech-stack
+tech-stack
+├── frontend
+│   ├── react
+│   ├── nextjs
+│   ├── javascript
+│   ├── html
+│   ├── css
+│   ├── tailwind
+│   └── bootstrap
+├── backend
+│   ├── nodejs
+│   ├── java
+│   ├── php
+│   └── laravel
+├── database
+│   ├── firebase
+│   ├── supabase
+│   ├── mysql
+│   └── postgresql
+├── devops
+│   ├── docker
+│   ├── aws
+│   └── vercel
+└── tools
+    ├── git
+    ├── github
+    ├── bitbucket
+    ├── vscode
+    ├── figma
+    ├── postman
+    └── notion
 
-```bash
-changonzaga@github:~$ ./contributions --watch
-```
+5 directories, 25 files
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/changonzaga/changonzaga/output/snake-dark.svg" alt="Contribution Snake Animation" />
-</p>
+changonzaga@github:~$ git log --oneline --graph -n 4
+* a1b2c3d (HEAD -> main) feat: add new project
+* e4f5g6h fix: clean up layout
+* i7j8k9l feat: build profile page
+* m0n1o2p init: first commit
 
-```bash
 changonzaga@github:~$ _
 ```
