@@ -38,7 +38,7 @@ jobs:
           curl -sL "https://github.com/${GITHUB_LOGIN}.png?size=400" -o assets/avatar.png
       - name: Generate card
         run: python scripts/generate_card.py
-       - name: Commit changes
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
