@@ -44,14 +44,14 @@ PROFILE_FIELDS = [
 ]
 
 # ---- Kali color scheme -----------------------------------------------------
-BG_COLOR = "#0b1120"          # terminal window background (deep navy)
-TITLEBAR_COLOR = "#141c30"    # title bar strip
-TITLE_TEXT_COLOR = "#7f8aa6"
-ACCENT = "#5dc9f2"             # ASCII art color (light blue dots)
-HEADER_COLOR = "#e8384f"       # bold red "login@login" header + prompt user/path
-LABEL_COLOR = "#ffffff"        # bold field labels
-VALUE_COLOR = "#5dc9f2"        # field values (cyan/blue)
-PALETTE = ["#0b1120", "#e8384f", "#3ddc84", "#ffd166", "#4d8cff",
+BG_COLOR = "#000000"          # terminal window background, pure black
+TITLEBAR_COLOR = "#111111"    # title bar strip
+TITLE_TEXT_COLOR = "#8a8a8a"  # title bar text
+ACCENT = "#39ff88"            # ASCII art color, terminal green
+HEADER_COLOR = "#39ff88"      # header, underline, and prompt
+LABEL_COLOR = "#ffffff"       # bold field labels
+VALUE_COLOR = "#8fe6bd"       # field values, soft green
+PALETTE = ["#000000", "#ff5f56", "#3ddc84", "#ffd166", "#4d8cff",
            "#b16cff", "#39e0d0", "#e8e8e8"]
 
 PROMPT_COMMANDS = [
