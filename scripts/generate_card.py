@@ -362,7 +362,7 @@ def build_svg(art_rows, fields):
 
     fields_h = len(fields) * FIELD_LINE_H
     swatch_y = fields_start_y + fields_h + 14
-    info_bottom = swatch_y + SWATCH + 10
+    info_bottom = fields_start_y + fields_h + 10
 
     ART_OFFSET_Y = -12
   
