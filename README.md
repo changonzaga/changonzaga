@@ -9,7 +9,6 @@ focus    : Web apps, mobile apps, clean UI
 
 changonzaga@github:~$ ls ./tech-stack
 ```
-<p align="center"><img src="profile-pixel.gif" width="200"/></p>
 <p align="center">
   <img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,javascript,java,html,css,tailwind,bootstrap,php,laravel,firebase,supabase,mysql,postgresql,docker,aws,vercel,git,github,bitbucket,vscode,figma,postman,notion&perline=9&theme=dark" />
 </p>
