@@ -65,12 +65,11 @@ PROMPT_HOLD_TIME = 1.1
 PROMPT_GAP_TIME = 0.4
 PROMPT_CHAR_W = 9.0
 
-# RAMP = " .:-=+*#%@"
-RAMP = " .:+#@"
+RAMP = " .:-=+*#%@"
 
 CELL_W = 8.4
 CELL_H = 15.0
-ART_COLS = 40
+ART_COLS = 4
 
 TITLEBAR_H = 34
 
@@ -131,6 +130,7 @@ def ascii_rows_from_image(path):
                 line.append(" ")
                 continue
             lum = gray_px[x, y] / 255.0
+            lum = lum ** 0.55
             idx = min(len(RAMP) - 2, int(lum * (len(RAMP) - 1)))
             line.append(RAMP[idx])
         out_rows.append("".join(line))
