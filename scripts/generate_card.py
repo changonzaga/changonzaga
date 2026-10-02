@@ -28,13 +28,16 @@ OUT_PATH = os.environ.get("OUT_PATH", "assets/profile.svg")
 # Field list shown on the right, neofetch-style. Edit the text freely.
 # ---------------------------------------------------------------------------
 PROFILE_FIELDS = [
-    ("Role", "full-stack developer"),
-    ("Location", "Bicol, Philippines"),
-    ("Focus", "web apps, mobile apps, clean UI"),
-    ("Stack.Frontend", "react, nextjs, tailwind"),
-    ("Stack.Backend", "nodejs, php, laravel, java"),
-    ("Stack.Database", "firebase, supabase, mysql, postgresql"),
-    ("Tools", "git, docker, aws, vercel, figma"),
+    ("Role", "full-stack web developer"),
+    ("Education", "BSIT, Camarines Sur Polytechnic Colleges"),
+    ("Location", "Pili, Camarines Sur, Philippines"),
+    ("Languages", "php, javascript, sql, java, html, css"),
+    ("Frameworks", "codeigniter 4, tailwind, alpine.js, bootstrap"),
+    ("Database", "mysql"),
+    ("Tools", "git, github, gitlab, vscode, postman, composer"),
+    ("Cloud", "azure, vercel, hostinger"),
+    ("Security", "2fa, oauth, owasp, nikto"),
+    ("Projects", "educonnect, bfp pili pims, portfolio"),
     ("Contact.GitHub", f"github.com/{LOGIN}"),
 ]
 
@@ -54,9 +57,9 @@ PALETTE = []                  # empty list removes the color swatches
 # Typing effect at the terminal prompt. Edit the list freely.
 # ---------------------------------------------------------------------------
 PROMPT_COMMANDS = [
-    "full-stack developer",
-    "web and mobile apps",
-    "clean UI",
+    "full-stack web developer",
+    "codeigniter 4 and mysql",
+    "BSIT graduate",
 ]
 PROMPT_TYPE_SPEED = 0.08
 PROMPT_DELETE_SPEED = 0.045
