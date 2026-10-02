@@ -1,5 +1,3 @@
-<p align="center"><img src="profile2.gif"/></p>
-
 ```bash
 changonzaga@github:~$ whoami
 changonzaga
