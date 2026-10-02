@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 """
-Kali-Linux-terminal-styled neofetch profile SVG generator.
+Black terminal-styled neofetch profile SVG generator.
 
-Same engine as the original script, but wrapped in a dark terminal window
-(title bar + traffic-light dots) and recolored to match the classic
-Kali look: red "user@host" header/prompt, cyan/blue field values,
-light-blue ASCII art, navy window background.
+Wraps the card in a terminal window (title bar + traffic-light dots).
+Converts your GitHub avatar into ASCII art and adds live GitHub stats.
 
 Env vars:
   GITHUB_LOGIN   - github username to fetch stats for (required)
   GITHUB_TOKEN   - token with at least public read access (required for live stats)
   AVATAR_PATH    - optional explicit path to an avatar image
-  OUT_PATH       - output svg path (default: profile.svg)
+  OUT_PATH       - output svg path (default: assets/profile.svg)
 """
 
 import os
@@ -22,28 +20,25 @@ from xml.sax.saxutils import escape as xml_escape
 
 random.seed()
 
-LOGIN = os.environ.get("GITHUB_LOGIN", "kali")
+LOGIN = os.environ.get("GITHUB_LOGIN", "changonzaga")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
 OUT_PATH = os.environ.get("OUT_PATH", "assets/profile.svg")
 
 # ---------------------------------------------------------------------------
-# Field list shown on the right, neofetch-style.
+# Field list shown on the right, neofetch-style. Edit the text freely.
 # ---------------------------------------------------------------------------
 PROFILE_FIELDS = [
-    ("Role", "informatics student"),
-    ("Focus", "junior web developer & cybersecurity enthusiast"),
-    ("Stack.Frontend", "html, css, javascript"),
-    ("Stack.Backend", "php, laravel, codeigniter"),
-    ("Stack.Scripting", "python"),
-    ("Stack.Database", "mysql"),
-    ("Stack.Security", "burp suite"),
-    ("Environment", "linux, git, github, vscode"),
-    ("Interests", "cybersecurity"),
+    ("Role", "full-stack developer"),
+    ("Location", "Bicol, Philippines"),
+    ("Focus", "web apps, mobile apps, clean UI"),
+    ("Stack.Frontend", "react, nextjs, tailwind"),
+    ("Stack.Backend", "nodejs, php, laravel, java"),
+    ("Stack.Database", "firebase, supabase, mysql, postgresql"),
+    ("Tools", "git, docker, aws, vercel, figma"),
     ("Contact.GitHub", f"github.com/{LOGIN}"),
-    ("Contact.Telegram", "t.me/pangeran1337"),
 ]
 
-# ---- Kali color scheme -----------------------------------------------------
+# ---- Black terminal color scheme ------------------------------------------
 BG_COLOR = "#000000"          # terminal window background, pure black
 TITLEBAR_COLOR = "#111111"    # title bar strip
 TITLE_TEXT_COLOR = "#8a8a8a"  # title bar text
@@ -51,13 +46,17 @@ ACCENT = "#39ff88"            # ASCII art color, terminal green
 HEADER_COLOR = "#39ff88"      # header, underline, and prompt
 LABEL_COLOR = "#ffffff"       # bold field labels
 VALUE_COLOR = "#8fe6bd"       # field values, soft green
-PALETTE = ["#000000", "#ff5f56", "#3ddc84", "#ffd166", "#4d8cff",
-           "#b16cff", "#39e0d0", "#e8e8e8"]
+TITLEBAR_LINE_COLOR = "#222222"
+SWATCH_OUTLINE_COLOR = "#333333"
+PALETTE = []                  # empty list removes the color swatches
 
+# ---------------------------------------------------------------------------
+# Typing effect at the terminal prompt. Edit the list freely.
+# ---------------------------------------------------------------------------
 PROMPT_COMMANDS = [
-    "informatics student",
-    "junior web developer",
-    "cybersecurity enthusiast",
+    "full-stack developer",
+    "web and mobile apps",
+    "clean UI",
 ]
 PROMPT_TYPE_SPEED = 0.08
 PROMPT_DELETE_SPEED = 0.045
@@ -65,11 +64,13 @@ PROMPT_HOLD_TIME = 1.1
 PROMPT_GAP_TIME = 0.4
 PROMPT_CHAR_W = 9.0
 
+# ASCII ramp: index 0 is blank, the rest run from light to dense.
 RAMP = " .:-=+*#%@"
 
+# Character-cell metrics used for the ASCII art grid.
 CELL_W = 8.4
 CELL_H = 15.0
-ART_COLS = 4
+ART_COLS = 46
 
 TITLEBAR_H = 34
 
@@ -86,7 +87,8 @@ def find_avatar():
 
 
 def ascii_rows_from_image(path):
-    from PIL import Image
+    """Returns a list of strings, one per row, forming the ASCII art."""
+    from PIL import Image, ImageOps
     import numpy as np
 
     img = Image.open(path).convert("RGBA")
@@ -100,8 +102,8 @@ def ascii_rows_from_image(path):
     rgb = arr[..., :3]
     alpha = arr[..., 3]
 
-    has_real_alpha = alpha.min() < 250
-    if not has_real_alpha:
+    # No transparency: remove the background by comparing to the corner color.
+    if alpha.min() >= 250:
         m = max(2, int(side * 0.05))
         corners = np.concatenate([
             rgb[0:m, 0:m].reshape(-1, 3),
@@ -111,13 +113,14 @@ def ascii_rows_from_image(path):
         ], axis=0)
         bg_color = np.median(corners, axis=0)
         dist = np.sqrt(((rgb - bg_color) ** 2).sum(axis=-1))
-        alpha = np.clip((dist - 42.0) * 6.0, 0, 255)
+        alpha = np.clip((dist - 30.0) * 6.0, 0, 255)
 
     rows = max(1, round(ART_COLS * (CELL_W / CELL_H)))
 
     mask_img = Image.fromarray(alpha.astype(np.uint8), mode="L").resize((ART_COLS, rows), Image.LANCZOS)
-    gray_img = Image.fromarray(rgb.astype(np.uint8)).convert("L").resize((ART_COLS, rows), Image.LANCZOS)
-    gray_img = __import__("PIL.ImageOps", fromlist=["ImageOps"]).autocontrast(gray_img, cutoff=2)
+    gray_img = Image.fromarray(rgb.astype(np.uint8)).convert("L")
+    gray_img = ImageOps.autocontrast(gray_img, cutoff=2)
+    gray_img = gray_img.resize((ART_COLS, rows), Image.LANCZOS)
     mask_px = mask_img.load()
     gray_px = gray_img.load()
 
@@ -125,44 +128,35 @@ def ascii_rows_from_image(path):
     for y in range(rows):
         line = []
         for x in range(ART_COLS):
-            fg = mask_px[x, y] / 255.0
-            if fg < 0.22:
+            if mask_px[x, y] / 255.0 < 0.22:
                 line.append(" ")
                 continue
-            lum = gray_px[x, y] / 255.0
-            lum = lum ** 0.55
-            idx = min(len(RAMP) - 2, int(lum * (len(RAMP) - 1)))
-            line.append(RAMP[idx])
+            lum = (gray_px[x, y] / 255.0) ** 0.6
+            # Start at index 1 so the darkest pixel inside the figure still draws a dot.
+            idx = 1 + int(lum * (len(RAMP) - 2))
+            line.append(RAMP[min(idx, len(RAMP) - 1)])
         out_rows.append("".join(line))
     return out_rows
 
 
-def ascii_rows_dragon():
-    """Procedural Kali-dragon-ish silhouette (stylized, dotted) when no
-    avatar is provided — echoes the curled-tail dragon look of the
-    reference screenshot using the character ramp for shading."""
+def ascii_rows_placeholder():
+    """Head and shoulders silhouette when no avatar exists."""
     rows_n = max(1, round(ART_COLS * (CELL_W / CELL_H)))
-    mid_chars = ":;."
+    mid_chars = "#*+=-:."
 
-    def in_dragon(x, y):
-        nx = (x - ART_COLS * 0.42) / (ART_COLS / 2)
-        ny = (y - rows_n * 0.5) / (rows_n / 2)
-        # a loose spiral/curl shape reminiscent of the Kali dragon curve
-        r = (nx ** 2 + ny ** 2) ** 0.5
-        theta = (nx * 3.4 + ny * 2.1)
-        spiral = abs((r * 5.0 - theta) % 2.0 - 1.0) < 0.22
-        body = r < 0.9
-        return spiral and body
+    def in_shape(x, y):
+        nx = (x - ART_COLS / 2) / (ART_COLS / 2)
+        ny = (y - rows_n / 2) / (rows_n / 2)
+        head = (nx ** 2 + (ny + 0.5) ** 2 * 1.15) < 0.36 ** 2
+        shoulders = (ny > 0.05) and ((nx ** 2) / (0.9 ** 2) + ((ny - 0.55) ** 2) / (0.8 ** 2) < 1.0)
+        return head or shoulders
 
     out_rows = []
     for y in range(rows_n):
         line = []
         for x in range(ART_COLS):
-            if in_dragon(x, y):
-                if random.random() < 0.12:
-                    line.append(" ")
-                else:
-                    line.append(random.choice(mid_chars))
+            if in_shape(x, y):
+                line.append(" " if random.random() < 0.08 else random.choice(mid_chars))
             else:
                 line.append(" ")
         out_rows.append("".join(line))
@@ -287,7 +281,7 @@ def fetch_github_stats(login, token):
         top_langs = sorted(lang_count, key=lang_count.get, reverse=True)[:4]
         stats["top_languages"] = ", ".join(top_langs) if top_langs else "N/A"
 
-        # GitHub contributions for the current year via GraphQL API.
+        # Contributions for the current year via the GraphQL API.
         current_year = datetime.now(timezone.utc).year
         from_date = f"{current_year}-01-01T00:00:00Z"
         to_date = f"{current_year}-12-31T23:59:59Z"
@@ -309,11 +303,7 @@ def fetch_github_stats(login, token):
             headers=headers,
             json={
                 "query": graphql_query,
-                "variables": {
-                    "login": login,
-                    "from": from_date,
-                    "to": to_date,
-                },
+                "variables": {"login": login, "from": from_date, "to": to_date},
             },
             timeout=15,
         )
@@ -328,20 +318,18 @@ def fetch_github_stats(login, token):
         else:
             user_data = graphql_data.get("data", {}).get("user")
             if user_data:
-                contributions = user_data.get(
-                    "contributionsCollection", {}
-                ).get(
-                    "contributionCalendar", {}
-                ).get(
-                    "totalContributions"
+                contributions = (
+                    user_data.get("contributionsCollection", {})
+                    .get("contributionCalendar", {})
+                    .get("totalContributions")
                 )
-
                 if contributions is not None:
                     stats["contributions"] = str(contributions)
 
     except Exception as e:
         print(f"warning: failed to fetch live stats: {e}", file=sys.stderr)
     return stats
+
 
 def build_svg(art_rows, fields):
     PAD = 34
@@ -362,18 +350,20 @@ def build_svg(art_rows, fields):
 
     fields_h = len(fields) * FIELD_LINE_H
     swatch_y = fields_start_y + fields_h + 14
-    info_bottom = fields_start_y + fields_h + 10
+    if PALETTE:
+        info_bottom = swatch_y + SWATCH + 10
+    else:
+        info_bottom = fields_start_y + fields_h + 10
 
     ART_OFFSET_Y = -12
-  
-    art_top = fields_start_y +  ART_OFFSET_Y
+    art_top = fields_start_y + ART_OFFSET_Y
     art_bottom = art_top + ART_H
     content_bottom = max(info_bottom, art_bottom)
 
     prompt_y = content_bottom + 40
     H = prompt_y + PROMPT_H + 20
     header_text = f"{LOGIN}@github"
-    rule_len = max(len(header_text) + 2, ART_COLS)
+    rule_len = max(len(header_text) + 2, 34)
     W = info_x + max(360, len(max([f"{k}: {v}" for k, v in fields], key=len)) * 8.2) + PAD
 
     art_lines = []
@@ -409,11 +399,12 @@ def build_svg(art_rows, fields):
         delay = 0.5 + len(fields) * 0.06 + i * 0.05
         swatch_lines.append(
             f'\n      <rect x="{x:.1f}" y="{swatch_y:.1f}" width="{SWATCH}" height="{SWATCH}" rx="3" '
-            f'fill="{color}" stroke="#2a3350" stroke-width="1" class="swatch" style="animation-delay:{delay:.2f}s" />'
+            f'fill="{color}" stroke="{SWATCH_OUTLINE_COLOR}" stroke-width="1" class="swatch" '
+            f'style="animation-delay:{delay:.2f}s" />'
         )
     swatch_svg = "".join(swatch_lines)
 
-    prompt_line1 = f"┌──({LOGIN}@github-[~]"
+    prompt_line1 = f"┌──({LOGIN}@github)-[~]"
     prompt_line2 = "└─$ "
 
     typed_x = PAD + (len(prompt_line2) + 1) * 9.0
@@ -431,7 +422,7 @@ def build_svg(art_rows, fields):
 
     W = max(W, typed_x + cmd_max_w + PAD)
 
-    # --- window chrome (title bar + traffic-light dots + title label) -----
+    # Window chrome: title bar, traffic-light dots, title label.
     title_text = f"{LOGIN}@github: ~"
     chrome_svg = f'''
   <rect x="0" y="0" width="{W:.0f}" height="{H:.0f}" rx="10" fill="{BG_COLOR}" />
@@ -441,7 +432,7 @@ def build_svg(art_rows, fields):
   <circle cx="46" cy="{TITLEBAR_H/2:.0f}" r="6" fill="#febc2e" />
   <circle cx="68" cy="{TITLEBAR_H/2:.0f}" r="6" fill="#28c840" />
   <text x="{W/2:.0f}" y="{TITLEBAR_H/2 + 5:.0f}" text-anchor="middle" class="titletext">{xml_escape(title_text)}</text>
-  <line x1="0" y1="{TITLEBAR_H}" x2="{W:.0f}" y2="{TITLEBAR_H}" stroke="#1f2740" stroke-width="1" />'''
+  <line x1="0" y1="{TITLEBAR_H}" x2="{W:.0f}" y2="{TITLEBAR_H}" stroke="{TITLEBAR_LINE_COLOR}" stroke-width="1" />'''
 
     return f'''<svg width="{W:.0f}" height="{H:.0f}" viewBox="0 0 {W:.0f} {H:.0f}" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -485,8 +476,8 @@ def main():
         print(f"using avatar image: {avatar_path}")
         art_rows = ascii_rows_from_image(avatar_path)
     else:
-        print("no avatar found, using procedural Kali-dragon placeholder art")
-        art_rows = ascii_rows_dragon()
+        print("no avatar found, using procedural placeholder art")
+        art_rows = ascii_rows_placeholder()
 
     stats = fetch_github_stats(LOGIN, TOKEN)
 
@@ -496,7 +487,7 @@ def main():
         ("GitHub.Stars", stats["stars"]),
         ("GitHub.Followers", stats["followers"]),
         ("GitHub.Languages", stats["top_languages"]),
-        ('GitHub.Contributions', stats["contributions"])
+        ("GitHub.Contributions", stats["contributions"]),
     ])
 
     svg = build_svg(art_rows, fields)
